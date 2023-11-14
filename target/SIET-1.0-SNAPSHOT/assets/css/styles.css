@@ -45,3 +45,14 @@
     margin-left: 20px; /* Agrega un espacio entre la imagen y el texto */
 
 }
+
+th{
+    width: 120px;
+}
+
+
+.backutez{
+    background-color: #052c65 !important;
+    height: 30px;
+}
+
