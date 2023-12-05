@@ -1,5 +1,3 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,44 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.1/dist/sweetalert2.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.1/dist/sweetalert2.min.js"></script>
     <title>Encuesta</title>
 </head>
 
 <body>
-<div class="container-">
-    <div class="row mt-5">
-        <div class="col-4 pt-5">
-            <div class="container text-center">
-                <img class="iconos-svg" src="assets/svg/store-svgrepo-com.svg" alt="Icono tiendita">
-                <small>Tienditas disponibles</small>
-                <div class="container">
-                    <select class="form-select form-select-sm w-50 mt-2 mx-auto" aria-label="Default select example">
-                        <option value="1">Tiendita "La esquina"</option>
-                        <option value="2">TIenda Mari</option>
-                        <option value="3">TIenda Roja</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="col-4">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
             <div class="container-fluid text-center">
                 <h4 class="mt-5 mb-5">Sistema Integral de Encuestas de Tienditas</h4>
             </div>
         </div>
-        <div class="col-4 pt-5">
-            <div class="container text-center">
-                <img class="iconos-svg" src="assets/svg/arrival-svgrepo-com.svg" alt="">
-                <small>Encuesta</small>
-                <div class="container text-center">
-                    <select class="form-select form-select-sm w-25 mt-2 mx-auto" aria-label="Default select example">
-                        <option value="4">2023</option>
-                        <option value="5">2022</option>
-                        <option value="6">2021</option>
-                    </select>
-                </div>
-            </div>
+    </div>
+    <div class="row row-cols-2 justify-content-evenly">
+        <img class="iconos-svg" src="assets/svg/store-svgrepo-com.svg" alt="Icono tiendita">
+        <div class="col-4">
+            <small>Tienditas disponibles</small>
+            <select class="form-select form-select-sm" aria-label="Default select example">
+                <option value="1">Tiendita "La esquina"</option>
+                <option value="2">TIenda Mari</option>
+                <option value="3">TIenda Roja</option>
+            </select>
+        </div>
+        <img class="iconos-svg" src="assets/svg/arrival-svgrepo-com.svg" alt="">
+        <div class="col-4">
+            <small>Año</small>
+            <select class="form-select form-select-sm" aria-label="Default select example">
+                <option value="4">2023</option>
+                <option value="5">2022</option>
+                <option value="6">2021</option>
+            </select>
         </div>
     </div>
 </div>
@@ -55,7 +45,7 @@
         <table class="table table-bordered">
             <thead>
             <tr class="text-center table-dark borde-derecho">
-                <th scope="col" id="thprincipal">Característica</th>
+                <th scope="col">Característica</th>
                 <th scope="col" class="text-danger">Mala</th>
                 <th scope="col" class="text-warning">Regular</th>
                 <th scope="col" class="text-success">Buena</th>
@@ -137,49 +127,51 @@
             </tr>
             <tr class="compatibilidad-row borde-bajo1 table-dark" style="border-left: 2px">
                 <td colspan="5" style="text-align: right;">
-                <span>
-                    Promedio:
-                </span>
+                            <span>
+                                Promedio:
+                            </span>
                 </td>
-                <td class="bg-white text-dark" id="promedio"></td>
+                <td class="bg-white text-dark">88.2</td>
             </tr>
             </tbody>
         </table>
 
     </div>
-    <div class="container-fluid backutez" style="background-color: #002E60; height: 100px; border-radius: 10px;">
-        <div class="container p-4 mt-5">
-        <div class="row row-cols-4 text-center mt-2">
+    <div class="container">
+        <div class="row row-cols-4 text-center">
             <div class="col">
-                <button type="button" class="btn btn-primary" onclick="guardarEncuesta()">Guardar <i data-feather="save"></i></button>
+                <button type="button" class="btn btn-primary">Guardar <i data-feather="save"></i></button>
             </div>
             <div class="col">
-                <button type="button" class="btn btn-warning" onclick="cancelarAccion()">Cancelar <i data-feather="x-octagon"></i></button>
+                <button type="button" class="btn btn-warning">Cancelar <i data-feather="x-octagon"></i></button>
             </div>
             <div class="col">
-                <button type="button" class="btn btn-danger" onclick="limpiarFormulario()">Limpiar <i data-feather="trash"></i></button>
+                <button type="button" class="btn btn-danger">Limpiar <i data-feather="trash"></i></button>
             </div>
             <div class="col">
-                <button type="button" class="btn btn-success" onclick="mostrarResumen()">Resumen <i data-feather="file-text"></i></button>
+                <button type="button" class="btn btn-success">Resumen <i data-feather="file-text"></i></button>
             </div>
         </div>
-        </div>
+
     </div>
 </div>
 
 
 
 <script>
+
     const funcionalidadRadios = document.querySelectorAll('.funcionalidad-row input[name="funcionalidad"]');
     funcionalidadRadios.forEach(radio => {
         radio.addEventListener('click', function() {
             const selectedValue = this.value;
             const tdElement = this.parentNode;
 
+            // Restaurar el color de fondo de todas las celdas td
             funcionalidadRadios.forEach(radio => {
                 radio.parentNode.style.backgroundColor = '';
             });
 
+            // Cambiar el color de fondo de la celda td solo si se selecciona una opción
             if (this.checked) {
                 if (selectedValue === 'mala') {
                     tdElement.style.backgroundColor = 'red';
@@ -201,10 +193,13 @@
         radio.addEventListener('click', function() {
             const selectedValue = this.value;
             const tdElement = this.parentNode;
+
+            // Restaurar el color de fondo de todas las celdas td
             confiabilidadRadios.forEach(radio => {
                 radio.parentNode.style.backgroundColor = '';
             });
 
+            // Cambiar el color de fondo de la celda td solo si se selecciona una opción
             if (this.checked) {
                 if (selectedValue === 'mala') {
                     tdElement.style.backgroundColor = 'red';
@@ -227,10 +222,12 @@
             const selectedValue = this.value;
             const tdElement = this.parentNode;
 
+            // Restaurar el color de fondo de todas las celdas td
             usabilidadRadios.forEach(radio => {
                 radio.parentNode.style.backgroundColor = '';
             });
 
+            // Cambiar el color de fondo de la celda td solo si se selecciona una opción
             if (this.checked) {
                 if (selectedValue === 'mala') {
                     tdElement.style.backgroundColor = 'red';
@@ -253,10 +250,12 @@
             const selectedValue = this.value;
             const tdElement = this.parentNode;
 
+            // Restaurar el color de fondo de todas las celdas td
             rendimientoRadios.forEach(radio => {
                 radio.parentNode.style.backgroundColor = '';
             });
 
+            // Cambiar el color de fondo de la celda td solo si se selecciona una opción
             if (this.checked) {
                 if (selectedValue === 'mala') {
                     tdElement.style.backgroundColor = 'red';
@@ -279,10 +278,12 @@
             const selectedValue = this.value;
             const tdElement = this.parentNode;
 
+            // Restaurar el color de fondo de todas las celdas td
             mantenimientoRadios.forEach(radio => {
                 radio.parentNode.style.backgroundColor = '';
             });
 
+            // Cambiar el color de fondo de la celda td solo si se selecciona una opción
             if (this.checked) {
                 if (selectedValue === 'mala') {
                     tdElement.style.backgroundColor = 'red';
@@ -310,6 +311,7 @@
                 radio.parentNode.style.backgroundColor = '';
             });
 
+            // Cambiar el color de fondo de la celda td solo si se selecciona una opción
             if (this.checked) {
                 if (selectedValue === 'mala') {
                     tdElement.style.backgroundColor = 'red';
@@ -337,6 +339,7 @@
                 radio.parentNode.style.backgroundColor = '';
             });
 
+            // Cambiar el color de fondo de la celda td solo si se selecciona una opción
             if (this.checked) {
                 if (selectedValue === 'mala') {
                     tdElement.style.backgroundColor = 'red';
@@ -380,127 +383,31 @@
             }
         });
     });
-
-    const radios = document.querySelectorAll('input[type="radio"]');
-    const promedioElement = document.getElementById('promedio');
-
-    const valores = {
-        "mala": 0,
-        "regular": 25,
-        "buena": 50,
-        "muybuena": 75,
-        "excelente": 100
-    };
-
-    radios.forEach(radio => {
-        radio.addEventListener('change', () => {
-            let total = 0;
-            radios.forEach(radio => {
-                if (radio.checked) {
-                    total += valores[radio.value];
-                }
-            });
-
-            const promedio = (total / 8).toFixed(2);
-            promedioElement.textContent = promedio;
-        });
-    });
-
-    function guardarEncuesta() {
-        const funcionalidadRadios = document.querySelectorAll('.funcionalidad-row input[name="funcionalidad"]');
-        const confiabilidadRadios = document.querySelectorAll('.confiabilidad-row input[name="confiabilidad"]');
-        const usabilidadRadios = document.querySelectorAll('.usabilidad-row input[name="usabilidad"]');
-        const rendimientoRadios = document.querySelectorAll('.rendimiento-row input[name="rendimiento"]');
-        const mantenimientoRadios = document.querySelectorAll('.mantenimiento-row input[name="mantenimiento"]');
-        const portabilidadRadios = document.querySelectorAll('.portabilidad-row input[name="portabilidad"]');
-        const seguridadRadios = document.querySelectorAll('.seguridad-row input[name="seguridad"]');
-        const compatibilidadRadios = document.querySelectorAll('.compatibilidad-row input[name="compatibilidad"]');
-
-        // Función para verificar si todos los radios están seleccionados
-        function todosRadiosSeleccionados(radios) {
-            return Array.from(radios).every(radio => radio.checked);
-        }
-
-        if (
-            todosRadiosSeleccionados(funcionalidadRadios) &&
-            todosRadiosSeleccionados(confiabilidadRadios) &&
-            todosRadiosSeleccionados(usabilidadRadios) &&
-            todosRadiosSeleccionados(rendimientoRadios) &&
-            todosRadiosSeleccionados(mantenimientoRadios) &&
-            todosRadiosSeleccionados(portabilidadRadios) &&
-            todosRadiosSeleccionados(seguridadRadios) &&
-            todosRadiosSeleccionados(compatibilidadRadios)
-        ) {
-            Swal.fire({
-                title: 'Guardar encuesta',
-                text: '¿Estás seguro de que deseas guardar la encuesta?',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'Sí, guardar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Lógica para guardar la encuesta
-                    Swal.fire('Encuesta guardada', '', 'success');
-                }
-            });
-        } else {
-            Swal.fire('Por favor, selecciona todas las respuestas antes de guardar', '', 'error');
-        }
-    }
-
-
-
-
-    function cancelarAccion() {
-        Swal.fire({
-            title: 'Cancelar acción',
-            text: '¿Estás seguro de que deseas cancelar la acción?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonText: 'Sí, cancelar',
-            cancelButtonText: 'No, volver atrás'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Lógica para cancelar la acción
-                Swal.fire('Acción cancelada', '', 'info');
-            }
-        });
-    }
-
-    function limpiarFormulario() {
-        Swal.fire({
-            title: 'Limpiar formulario',
-            text: '¿Estás seguro de que deseas limpiar el formulario?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonText: 'Sí, limpiar',
-            cancelButtonText: 'No, volver atrás'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Lógica para limpiar el formulario
-                Swal.fire('Formulario limpiado', '', 'info');
-            }
-        });
-    }
-
-    function mostrarResumen() {
-        Swal.fire({
-            title: 'Mostrar resumen',
-            text: '¿Estás seguro de que deseas ver el resumen?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonText: 'Sí, ver resumen',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Lógica para mostrar el resumen
-                Swal.fire('Resumen mostrado', '', 'success');
-            }
-        });
-    }
-
 </script>
+
+<script>
+    // Obtén el formulario por su ID
+    const formularioEncuesta = document.getElementById('encuesta-form');
+
+    // Agrega un evento de envío al formulario
+    formularioEncuesta.addEventListener('submit', function(event) {
+        // Obtiene los valores seleccionados de los campos del formulario
+        const tiendita = document.querySelector('#tiendita-select').value;
+        const año = document.querySelector('#año-select').value;
+
+        // Valida los campos
+        if (tiendita === '' || año === '') {
+            // Si algún campo obligatorio está vacío, evita el envío del formulario
+            alert('Por favor, completa todos los campos de la encuesta.');
+            event.preventDefault();
+        } else {
+            // Si todos los campos están completos, el formulario se enviará
+            // Aquí puedes agregar el código para enviar los datos a través de AJAX o realizar otras acciones necesarias
+            alert('Gracias por completar la encuesta. Los datos se enviarán correctamente.');
+        }
+    });
+</script>
+
 
 
 <script src="assets/feather.js"></script>
@@ -508,7 +415,6 @@
 <script>
     feather.replace();
 </script>
-
 </body>
 
 </html>
