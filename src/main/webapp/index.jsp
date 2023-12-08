@@ -170,6 +170,7 @@
 
 
 <script>
+
     const funcionalidadRadios = document.querySelectorAll('.funcionalidad-row input[name="funcionalidad"]');
     funcionalidadRadios.forEach(radio => {
         radio.addEventListener('click', function() {

@@ -11,17 +11,25 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.1/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.1/dist/sweetalert2.min.js"></script>
     <title>Encuesta</title>
+    <style>
+        input{
+            width: 22px;
+            height: 22px;
+        }
+
+    </style>
 </head>
 
 <body>
-<div class="container-fluid bg-success-subtle">
+<div class="container-fluid bg-success-subtle" >
     <div class="row">
         <div class="col-4 pt-5">
             <div class="container text-center">
                 <img class="iconos-svg" src="assets/svg/store-svgrepo-com.svg" alt="Icono tiendita">
                 <small>Tienditas disponibles</small>
                 <div class="container">
-                    <select class="form-select form-select-sm w-50 mt-2 mx-auto" aria-label="Default select example">
+                    <select class="form-select form-select-sm w-50 mt-2 mx-auto" aria-label="Default select example" id="select1">
+                        <option selected value="0" disabled>Selecciona una tiendita</option>
                         <option value="1">Tiendita "La esquina"</option>
                         <option value="2">TIenda Mari</option>
                         <option value="3">TIenda Roja</option>
@@ -39,10 +47,11 @@
                 <img class="iconos-svg" src="assets/svg/arrival-svgrepo-com.svg" alt="">
                 <small>Encuesta</small>
                 <div class="container text-center">
-                    <select class="form-select form-select-sm w-50 mt-2 mx-auto" aria-label="Default select example">
-                        <option value="4">2023</option>
-                        <option value="5">2022</option>
-                        <option value="6">2021</option>
+                    <select class="form-select form-select-sm w-50 mt-2 mx-auto" aria-label="Default select example" id="select2">
+                        <option selected value="0" disabled>Seleccionar encuesta</option>
+                        <option value="4">2023A</option>
+                        <option value="5">2022F</option>
+                        <option value="6">2021W</option>
                     </select>
                 </div>
             </div>
@@ -50,23 +59,23 @@
     </div>
 </div>
 
-<div class="container mt-4 mb-5">
+<div class="container mt-4 mb-5" id="encuestaContainer" style="display: none">
     <div class="container mt-4">
         <table class="table table-bordered">
             <thead>
             <tr class="text-center table-dark borde-derecho">
-                <th scope="col" class="w-25">Característica</th>
+                <th scope="col" id="thprincipal">Característica</th>
                 <th scope="col" class="text-danger">Mala</th>
-                <th scope="col" class="text-warning">Regular</th>
-                <th scope="col" class="text-success">Buena</th>
-                <th scope="col" class="text-primary">Muy buena</th>
-                <th scope="col" class="text-info">Excelente</th>
+                <th scope="col" style="color: darkorange">Regular</th>
+                <th scope="col" style="color: gold">Buena</th>
+                <th scope="col" class="text-success">Muy buena</th>
+                <th scope="col" class="text-primary">Excelente</th>
             </tr>
             </thead>
             <tbody class="text-center">
             <tr class="funcionalidad-row borde-derecho">
                 <td scope="row" class="bordes-tabla"><img src="assets/img/Funcionalidad.png" class="iconos" alt="">Funcionalidad</td>
-                <td><input type="radio" name="funcionalidad" value="mala" style="width: 20px; height: 20px"></td>
+                <td><input type="radio" name="funcionalidad" value="mala"></td>
                 <td><input type="radio" name="funcionalidad" value="regular"></td>
                 <td><input type="radio" name="funcionalidad" value="buena"></td>
                 <td><input type="radio" name="funcionalidad" value="muybuena"></td>
@@ -170,6 +179,27 @@
 
 
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Obten los elementos select
+        var select1 = document.getElementById("select1");
+        var select2 = document.getElementById("select2");
+
+        // Agrega un evento de cambio a los elementos select
+        select1.addEventListener("change", mostrarEncuesta);
+        select2.addEventListener("change", mostrarEncuesta);
+
+        // Función para mostrar u ocultar la encuesta según las selecciones
+        function mostrarEncuesta() {
+            var encuestaContainer = document.getElementById("encuestaContainer");
+
+            if (select1.value !== "0" && select2.value !== "0") {
+                encuestaContainer.style.display = "block";
+            } else {
+                encuestaContainer.style.display = "none";
+                reiniciarRadioButtons();
+            }
+        }
+    });
     const funcionalidadRadios = document.querySelectorAll('.funcionalidad-row input[name="funcionalidad"]');
     funcionalidadRadios.forEach(radio => {
         radio.addEventListener('click', function() {
@@ -186,11 +216,11 @@
                 } else if (selectedValue === 'regular') {
                     tdElement.style.backgroundColor = 'orange';
                 } else if (selectedValue === 'buena') {
-                    tdElement.style.backgroundColor = 'green';
+                    tdElement.style.backgroundColor = 'gold';
                 } else if (selectedValue === 'muybuena') {
-                    tdElement.style.backgroundColor = 'blue';
+                    tdElement.style.backgroundColor = 'green';
                 } else if (selectedValue === 'excelente') {
-                    tdElement.style.backgroundColor = 'aqua';
+                    tdElement.style.backgroundColor = 'blue';
                 }
             }
         });
@@ -211,11 +241,11 @@
                 } else if (selectedValue === 'regular') {
                     tdElement.style.backgroundColor = 'orange';
                 } else if (selectedValue === 'buena') {
-                    tdElement.style.backgroundColor = 'green';
+                    tdElement.style.backgroundColor = 'gold';
                 } else if (selectedValue === 'muybuena') {
-                    tdElement.style.backgroundColor = 'blue';
+                    tdElement.style.backgroundColor = 'green';
                 } else if (selectedValue === 'excelente') {
-                    tdElement.style.backgroundColor = 'aqua';
+                    tdElement.style.backgroundColor = 'blue';
                 }
             }
         });
@@ -237,11 +267,11 @@
                 } else if (selectedValue === 'regular') {
                     tdElement.style.backgroundColor = 'orange';
                 } else if (selectedValue === 'buena') {
-                    tdElement.style.backgroundColor = 'green';
+                    tdElement.style.backgroundColor = 'gold';
                 } else if (selectedValue === 'muybuena') {
-                    tdElement.style.backgroundColor = 'blue';
+                    tdElement.style.backgroundColor = 'green';
                 } else if (selectedValue === 'excelente') {
-                    tdElement.style.backgroundColor = 'aqua';
+                    tdElement.style.backgroundColor = 'blue';
                 }
             }
         });
@@ -263,11 +293,11 @@
                 } else if (selectedValue === 'regular') {
                     tdElement.style.backgroundColor = 'orange';
                 } else if (selectedValue === 'buena') {
-                    tdElement.style.backgroundColor = 'green';
+                    tdElement.style.backgroundColor = 'gold';
                 } else if (selectedValue === 'muybuena') {
-                    tdElement.style.backgroundColor = 'blue';
+                    tdElement.style.backgroundColor = 'green';
                 } else if (selectedValue === 'excelente') {
-                    tdElement.style.backgroundColor = 'aqua';
+                    tdElement.style.backgroundColor = 'blue';
                 }
             }
         });
@@ -289,11 +319,11 @@
                 } else if (selectedValue === 'regular') {
                     tdElement.style.backgroundColor = 'orange';
                 } else if (selectedValue === 'buena') {
-                    tdElement.style.backgroundColor = 'green';
+                    tdElement.style.backgroundColor = 'gold';
                 } else if (selectedValue === 'muybuena') {
-                    tdElement.style.backgroundColor = 'blue';
+                    tdElement.style.backgroundColor = 'green';
                 } else if (selectedValue === 'excelente') {
-                    tdElement.style.backgroundColor = 'aqua';
+                    tdElement.style.backgroundColor = 'blue';
                 }
             }
         });
@@ -316,11 +346,11 @@
                 } else if (selectedValue === 'regular') {
                     tdElement.style.backgroundColor = 'orange';
                 } else if (selectedValue === 'buena') {
-                    tdElement.style.backgroundColor = 'green';
+                    tdElement.style.backgroundColor = 'gold';
                 } else if (selectedValue === 'muybuena') {
-                    tdElement.style.backgroundColor = 'blue';
+                    tdElement.style.backgroundColor = 'green';
                 } else if (selectedValue === 'excelente') {
-                    tdElement.style.backgroundColor = 'aqua';
+                    tdElement.style.backgroundColor = 'blue';
                 }
             }
         });
@@ -343,11 +373,11 @@
                 } else if (selectedValue === 'regular') {
                     tdElement.style.backgroundColor = 'orange';
                 } else if (selectedValue === 'buena') {
-                    tdElement.style.backgroundColor = 'green';
+                    tdElement.style.backgroundColor = 'gold';
                 } else if (selectedValue === 'muybuena') {
-                    tdElement.style.backgroundColor = 'blue';
+                    tdElement.style.backgroundColor = 'green';
                 } else if (selectedValue === 'excelente') {
-                    tdElement.style.backgroundColor = 'aqua';
+                    tdElement.style.backgroundColor = 'blue';
                 }
             }
         });
@@ -371,11 +401,11 @@
                 } else if (selectedValue === 'regular') {
                     tdElement.style.backgroundColor = 'orange';
                 } else if (selectedValue === 'buena') {
-                    tdElement.style.backgroundColor = 'green';
+                    tdElement.style.backgroundColor = 'gold';
                 } else if (selectedValue === 'muybuena') {
-                    tdElement.style.backgroundColor = 'blue';
+                    tdElement.style.backgroundColor = 'green';
                 } else if (selectedValue === 'excelente') {
-                    tdElement.style.backgroundColor = 'aqua';
+                    tdElement.style.backgroundColor = 'blue';
                 }
             }
         });
@@ -449,6 +479,32 @@
         }
     }
 
+    function limpiarFormulario() {
+        console.log('Limpiando formulario...');
+
+        Swal.fire({
+            title: 'Limpiar formulario',
+            text: '¿Estás seguro de que deseas limpiar el formulario?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, limpiar',
+            cancelButtonText: 'No, volver atrás'
+        }).then((result) => {
+            console.log('Resultado de Swal:', result);
+
+            if (result.isConfirmed) {
+                // Recargar la página
+                location.reload();
+
+                // O, si prefieres redirigir a una URL específica
+                // window.location.href = "tu_otra_pagina.html";
+
+                Swal.fire('Formulario limpiado', '', 'info');
+            }
+        });
+    }
+
+
 
 
 
@@ -468,22 +524,6 @@
         });
     }
 
-    function limpiarFormulario() {
-        Swal.fire({
-            title: 'Limpiar formulario',
-            text: '¿Estás seguro de que deseas limpiar el formulario?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonText: 'Sí, limpiar',
-            cancelButtonText: 'No, volver atrás'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Lógica para limpiar el formulario
-                Swal.fire('Formulario limpiado', '', 'info');
-            }
-        });
-    }
-
     function mostrarResumen() {
         Swal.fire({
             title: 'Mostrar resumen',
@@ -499,7 +539,6 @@
             }
         });
     }
-
 </script>
 
 
