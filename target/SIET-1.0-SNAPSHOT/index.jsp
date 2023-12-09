@@ -8,8 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.1/dist/sweetalert2.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.1/dist/sweetalert2.min.js"></script>
     <title>Encuesta</title>
     <style>
         input{
@@ -21,40 +19,32 @@
 </head>
 
 <body>
-<div class="container-fluid bg-success-subtle" >
+<div class="container-fluid">
     <div class="row">
-        <div class="col-4 pt-5">
-            <div class="container text-center">
-                <img class="iconos-svg" src="assets/svg/store-svgrepo-com.svg" alt="Icono tiendita">
-                <small>Tienditas disponibles</small>
-                <div class="container">
-                    <select class="form-select form-select-sm w-50 mt-2 mx-auto" aria-label="Default select example" id="select1">
-                        <option selected value="0" disabled>Selecciona una tiendita</option>
-                        <option value="1">Tiendita "La esquina"</option>
-                        <option value="2">TIenda Mari</option>
-                        <option value="3">TIenda Roja</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="col-4">
+        <div class="col">
             <div class="container-fluid text-center">
                 <h4 class="mt-5 mb-5">Sistema Integral de Encuestas de Tienditas</h4>
             </div>
         </div>
-        <div class="col-4 pt-5">
-            <div class="container text-center">
-                <img class="iconos-svg" src="assets/svg/arrival-svgrepo-com.svg" alt="">
-                <small>Encuesta</small>
-                <div class="container text-center">
-                    <select class="form-select form-select-sm w-50 mt-2 mx-auto" aria-label="Default select example" id="select2">
-                        <option selected value="0" disabled>Seleccionar encuesta</option>
-                        <option value="4">2023A</option>
-                        <option value="5">2022F</option>
-                        <option value="6">2021W</option>
-                    </select>
-                </div>
-            </div>
+    </div>
+    <div class="row row-cols-2 justify-content-evenly">
+        <img class="iconos-svg" src="assets/svg/store-svgrepo-com.svg" alt="Icono tiendita">
+        <div class="col-4">
+            <small>Tienditas disponibles</small>
+            <select class="form-select form-select-sm" aria-label="Default select example">
+                <option value="1">Tiendita "La esquina"</option>
+                <option value="2">TIenda Mari</option>
+                <option value="3">TIenda Roja</option>
+            </select>
+        </div>
+        <img class="iconos-svg" src="assets/svg/arrival-svgrepo-com.svg" alt="">
+        <div class="col-4">
+            <small>Año</small>
+            <select class="form-select form-select-sm" aria-label="Default select example">
+                <option value="4">2023</option>
+                <option value="5">2022</option>
+                <option value="6">2021</option>
+            </select>
         </div>
     </div>
 </div>
@@ -64,12 +54,12 @@
         <table class="table table-bordered">
             <thead>
             <tr class="text-center table-dark borde-derecho">
-                <th scope="col" id="thprincipal">Característica</th>
+                <th scope="col">Característica</th>
                 <th scope="col" class="text-danger">Mala</th>
-                <th scope="col" style="color: darkorange">Regular</th>
-                <th scope="col" style="color: gold">Buena</th>
-                <th scope="col" class="text-success">Muy buena</th>
-                <th scope="col" class="text-primary">Excelente</th>
+                <th scope="col" class="text-warning">Regular</th>
+                <th scope="col" class="text-success">Buena</th>
+                <th scope="col" class="text-primary">Muy buena</th>
+                <th scope="col" class="text-info">Excelente</th>
             </tr>
             </thead>
             <tbody class="text-center">
@@ -146,39 +136,39 @@
             </tr>
             <tr class="compatibilidad-row borde-bajo1 table-dark" style="border-left: 2px">
                 <td colspan="5" style="text-align: right;">
-                <span>
-                    Promedio:
-                </span>
+                            <span>
+                                Promedio:
+                            </span>
                 </td>
-                <td class="bg-white text-dark" id="promedio"></td>
+                <td class="bg-white text-dark">88.2</td>
             </tr>
             </tbody>
         </table>
 
     </div>
-    <div class="container-fluid backutez" style="background-color: #002E60; height: 100px; border-radius: 10px;">
-        <div class="container p-4 mt-5">
-        <div class="row row-cols-4 text-center mt-2">
+    <div class="container">
+        <div class="row row-cols-4 text-center">
             <div class="col">
-                <button type="button" class="btn btn-primary" onclick="guardarEncuesta()">Guardar <i data-feather="save"></i></button>
+                <button type="button" class="btn btn-primary">Guardar <i data-feather="save"></i></button>
             </div>
             <div class="col">
-                <button type="button" class="btn btn-warning" onclick="cancelarAccion()">Cancelar <i data-feather="x-octagon"></i></button>
+                <button type="button" class="btn btn-warning">Cancelar <i data-feather="x-octagon"></i></button>
             </div>
             <div class="col">
-                <button type="button" class="btn btn-danger" onclick="limpiarFormulario()">Limpiar <i data-feather="trash"></i></button>
+                <button type="button" class="btn btn-danger">Limpiar <i data-feather="trash"></i></button>
             </div>
             <div class="col">
-                <button type="button" class="btn btn-success" onclick="mostrarResumen()">Resumen <i data-feather="file-text"></i></button>
+                <button type="button" class="btn btn-success">Resumen <i data-feather="file-text"></i></button>
             </div>
         </div>
-        </div>
+
     </div>
 </div>
 
 
 
 <script>
+
     document.addEventListener("DOMContentLoaded", function () {
         // Obten los elementos select
         var select1 = document.getElementById("select1");
@@ -206,21 +196,23 @@
             const selectedValue = this.value;
             const tdElement = this.parentNode;
 
+            // Restaurar el color de fondo de todas las celdas td
             funcionalidadRadios.forEach(radio => {
                 radio.parentNode.style.backgroundColor = '';
             });
 
+            // Cambiar el color de fondo de la celda td solo si se selecciona una opción
             if (this.checked) {
                 if (selectedValue === 'mala') {
                     tdElement.style.backgroundColor = 'red';
                 } else if (selectedValue === 'regular') {
                     tdElement.style.backgroundColor = 'orange';
                 } else if (selectedValue === 'buena') {
-                    tdElement.style.backgroundColor = 'gold';
-                } else if (selectedValue === 'muybuena') {
                     tdElement.style.backgroundColor = 'green';
-                } else if (selectedValue === 'excelente') {
+                } else if (selectedValue === 'muybuena') {
                     tdElement.style.backgroundColor = 'blue';
+                } else if (selectedValue === 'excelente') {
+                    tdElement.style.backgroundColor = 'aqua';
                 }
             }
         });
@@ -231,21 +223,24 @@
         radio.addEventListener('click', function() {
             const selectedValue = this.value;
             const tdElement = this.parentNode;
+
+            // Restaurar el color de fondo de todas las celdas td
             confiabilidadRadios.forEach(radio => {
                 radio.parentNode.style.backgroundColor = '';
             });
 
+            // Cambiar el color de fondo de la celda td solo si se selecciona una opción
             if (this.checked) {
                 if (selectedValue === 'mala') {
                     tdElement.style.backgroundColor = 'red';
                 } else if (selectedValue === 'regular') {
                     tdElement.style.backgroundColor = 'orange';
                 } else if (selectedValue === 'buena') {
-                    tdElement.style.backgroundColor = 'gold';
-                } else if (selectedValue === 'muybuena') {
                     tdElement.style.backgroundColor = 'green';
-                } else if (selectedValue === 'excelente') {
+                } else if (selectedValue === 'muybuena') {
                     tdElement.style.backgroundColor = 'blue';
+                } else if (selectedValue === 'excelente') {
+                    tdElement.style.backgroundColor = 'aqua';
                 }
             }
         });
@@ -257,21 +252,23 @@
             const selectedValue = this.value;
             const tdElement = this.parentNode;
 
+            // Restaurar el color de fondo de todas las celdas td
             usabilidadRadios.forEach(radio => {
                 radio.parentNode.style.backgroundColor = '';
             });
 
+            // Cambiar el color de fondo de la celda td solo si se selecciona una opción
             if (this.checked) {
                 if (selectedValue === 'mala') {
                     tdElement.style.backgroundColor = 'red';
                 } else if (selectedValue === 'regular') {
                     tdElement.style.backgroundColor = 'orange';
                 } else if (selectedValue === 'buena') {
-                    tdElement.style.backgroundColor = 'gold';
-                } else if (selectedValue === 'muybuena') {
                     tdElement.style.backgroundColor = 'green';
-                } else if (selectedValue === 'excelente') {
+                } else if (selectedValue === 'muybuena') {
                     tdElement.style.backgroundColor = 'blue';
+                } else if (selectedValue === 'excelente') {
+                    tdElement.style.backgroundColor = 'aqua';
                 }
             }
         });
@@ -283,21 +280,23 @@
             const selectedValue = this.value;
             const tdElement = this.parentNode;
 
+            // Restaurar el color de fondo de todas las celdas td
             rendimientoRadios.forEach(radio => {
                 radio.parentNode.style.backgroundColor = '';
             });
 
+            // Cambiar el color de fondo de la celda td solo si se selecciona una opción
             if (this.checked) {
                 if (selectedValue === 'mala') {
                     tdElement.style.backgroundColor = 'red';
                 } else if (selectedValue === 'regular') {
                     tdElement.style.backgroundColor = 'orange';
                 } else if (selectedValue === 'buena') {
-                    tdElement.style.backgroundColor = 'gold';
-                } else if (selectedValue === 'muybuena') {
                     tdElement.style.backgroundColor = 'green';
-                } else if (selectedValue === 'excelente') {
+                } else if (selectedValue === 'muybuena') {
                     tdElement.style.backgroundColor = 'blue';
+                } else if (selectedValue === 'excelente') {
+                    tdElement.style.backgroundColor = 'aqua';
                 }
             }
         });
@@ -309,21 +308,23 @@
             const selectedValue = this.value;
             const tdElement = this.parentNode;
 
+            // Restaurar el color de fondo de todas las celdas td
             mantenimientoRadios.forEach(radio => {
                 radio.parentNode.style.backgroundColor = '';
             });
 
+            // Cambiar el color de fondo de la celda td solo si se selecciona una opción
             if (this.checked) {
                 if (selectedValue === 'mala') {
                     tdElement.style.backgroundColor = 'red';
                 } else if (selectedValue === 'regular') {
                     tdElement.style.backgroundColor = 'orange';
                 } else if (selectedValue === 'buena') {
-                    tdElement.style.backgroundColor = 'gold';
-                } else if (selectedValue === 'muybuena') {
                     tdElement.style.backgroundColor = 'green';
-                } else if (selectedValue === 'excelente') {
+                } else if (selectedValue === 'muybuena') {
                     tdElement.style.backgroundColor = 'blue';
+                } else if (selectedValue === 'excelente') {
+                    tdElement.style.backgroundColor = 'aqua';
                 }
             }
         });
@@ -340,17 +341,18 @@
                 radio.parentNode.style.backgroundColor = '';
             });
 
+            // Cambiar el color de fondo de la celda td solo si se selecciona una opción
             if (this.checked) {
                 if (selectedValue === 'mala') {
                     tdElement.style.backgroundColor = 'red';
                 } else if (selectedValue === 'regular') {
                     tdElement.style.backgroundColor = 'orange';
                 } else if (selectedValue === 'buena') {
-                    tdElement.style.backgroundColor = 'gold';
-                } else if (selectedValue === 'muybuena') {
                     tdElement.style.backgroundColor = 'green';
-                } else if (selectedValue === 'excelente') {
+                } else if (selectedValue === 'muybuena') {
                     tdElement.style.backgroundColor = 'blue';
+                } else if (selectedValue === 'excelente') {
+                    tdElement.style.backgroundColor = 'aqua';
                 }
             }
         });
@@ -367,17 +369,18 @@
                 radio.parentNode.style.backgroundColor = '';
             });
 
+            // Cambiar el color de fondo de la celda td solo si se selecciona una opción
             if (this.checked) {
                 if (selectedValue === 'mala') {
                     tdElement.style.backgroundColor = 'red';
                 } else if (selectedValue === 'regular') {
                     tdElement.style.backgroundColor = 'orange';
                 } else if (selectedValue === 'buena') {
-                    tdElement.style.backgroundColor = 'gold';
-                } else if (selectedValue === 'muybuena') {
                     tdElement.style.backgroundColor = 'green';
-                } else if (selectedValue === 'excelente') {
+                } else if (selectedValue === 'muybuena') {
                     tdElement.style.backgroundColor = 'blue';
+                } else if (selectedValue === 'excelente') {
+                    tdElement.style.backgroundColor = 'aqua';
                 }
             }
         });
@@ -401,40 +404,40 @@
                 } else if (selectedValue === 'regular') {
                     tdElement.style.backgroundColor = 'orange';
                 } else if (selectedValue === 'buena') {
-                    tdElement.style.backgroundColor = 'gold';
-                } else if (selectedValue === 'muybuena') {
                     tdElement.style.backgroundColor = 'green';
-                } else if (selectedValue === 'excelente') {
+                } else if (selectedValue === 'muybuena') {
                     tdElement.style.backgroundColor = 'blue';
+                } else if (selectedValue === 'excelente') {
+                    tdElement.style.backgroundColor = 'aqua';
                 }
             }
         });
     });
+</script>
 
-    const radios = document.querySelectorAll('input[type="radio"]');
-    const promedioElement = document.getElementById('promedio');
+<script>
+    // Obtén el formulario por su ID
+    const formularioEncuesta = document.getElementById('encuesta-form');
 
-    const valores = {
-        "mala": 0,
-        "regular": 25,
-        "buena": 50,
-        "muybuena": 75,
-        "excelente": 100
-    };
+    // Agrega un evento de envío al formulario
+    formularioEncuesta.addEventListener('submit', function(event) {
+        // Obtiene los valores seleccionados de los campos del formulario
+        const tiendita = document.querySelector('#tiendita-select').value;
+        const año = document.querySelector('#año-select').value;
 
-    radios.forEach(radio => {
-        radio.addEventListener('change', () => {
-            let total = 0;
-            radios.forEach(radio => {
-                if (radio.checked) {
-                    total += valores[radio.value];
-                }
-            });
+        // Valida los campos
+        if (tiendita === '' || año === '') {
+            // Si algún campo obligatorio está vacío, evita el envío del formulario
+            alert('Por favor, completa todos los campos de la encuesta.');
+            event.preventDefault();
+        } else {
+            // Si todos los campos están completos, el formulario se enviará
+            // Aquí puedes agregar el código para enviar los datos a través de AJAX o realizar otras acciones necesarias
+            alert('Gracias por completar la encuesta. Los datos se enviarán correctamente.');
+        }
 
-            const promedio = (total / 8).toFixed(2);
-            promedioElement.textContent = promedio;
-        });
     });
+</script>
 
     function guardarEncuesta() {
         const funcionalidadRadios = document.querySelectorAll('.funcionalidad-row input[name="funcionalidad"]');
@@ -478,6 +481,7 @@
             Swal.fire('Por favor, selecciona todas las respuestas antes de guardar', '', 'error');
         }
     }
+
 
     function limpiarFormulario() {
         console.log('Limpiando formulario...');
@@ -547,7 +551,6 @@
 <script>
     feather.replace();
 </script>
-
 </body>
 
 </html>
