@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +9,13 @@
     <link rel="stylesheet" href="assets/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
     <title>Encuesta</title>
+    <style>
+        input{
+            width: 22px;
+            height: 22px;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -40,7 +49,7 @@
     </div>
 </div>
 
-<div class="container mt-4 mb-5">
+<div class="container mt-4 mb-5" id="encuestaContainer" style="display: none">
     <div class="container mt-4">
         <table class="table table-bordered">
             <thead>
@@ -160,6 +169,27 @@
 
 <script>
 
+    document.addEventListener("DOMContentLoaded", function () {
+        // Obten los elementos select
+        var select1 = document.getElementById("select1");
+        var select2 = document.getElementById("select2");
+
+        // Agrega un evento de cambio a los elementos select
+        select1.addEventListener("change", mostrarEncuesta);
+        select2.addEventListener("change", mostrarEncuesta);
+
+        // Función para mostrar u ocultar la encuesta según las selecciones
+        function mostrarEncuesta() {
+            var encuestaContainer = document.getElementById("encuestaContainer");
+
+            if (select1.value !== "0" && select2.value !== "0") {
+                encuestaContainer.style.display = "block";
+            } else {
+                encuestaContainer.style.display = "none";
+                reiniciarRadioButtons();
+            }
+        }
+    });
     const funcionalidadRadios = document.querySelectorAll('.funcionalidad-row input[name="funcionalidad"]');
     funcionalidadRadios.forEach(radio => {
         radio.addEventListener('click', function() {
@@ -405,9 +435,115 @@
             // Aquí puedes agregar el código para enviar los datos a través de AJAX o realizar otras acciones necesarias
             alert('Gracias por completar la encuesta. Los datos se enviarán correctamente.');
         }
+
     });
 </script>
 
+    function guardarEncuesta() {
+        const funcionalidadRadios = document.querySelectorAll('.funcionalidad-row input[name="funcionalidad"]');
+        const confiabilidadRadios = document.querySelectorAll('.confiabilidad-row input[name="confiabilidad"]');
+        const usabilidadRadios = document.querySelectorAll('.usabilidad-row input[name="usabilidad"]');
+        const rendimientoRadios = document.querySelectorAll('.rendimiento-row input[name="rendimiento"]');
+        const mantenimientoRadios = document.querySelectorAll('.mantenimiento-row input[name="mantenimiento"]');
+        const portabilidadRadios = document.querySelectorAll('.portabilidad-row input[name="portabilidad"]');
+        const seguridadRadios = document.querySelectorAll('.seguridad-row input[name="seguridad"]');
+        const compatibilidadRadios = document.querySelectorAll('.compatibilidad-row input[name="compatibilidad"]');
+
+        // Función para verificar si todos los radios están seleccionados
+        function todosRadiosSeleccionados(radios) {
+            return Array.from(radios).every(radio => radio.checked);
+        }
+
+        if (
+            todosRadiosSeleccionados(funcionalidadRadios) &&
+            todosRadiosSeleccionados(confiabilidadRadios) &&
+            todosRadiosSeleccionados(usabilidadRadios) &&
+            todosRadiosSeleccionados(rendimientoRadios) &&
+            todosRadiosSeleccionados(mantenimientoRadios) &&
+            todosRadiosSeleccionados(portabilidadRadios) &&
+            todosRadiosSeleccionados(seguridadRadios) &&
+            todosRadiosSeleccionados(compatibilidadRadios)
+        ) {
+            Swal.fire({
+                title: 'Guardar encuesta',
+                text: '¿Estás seguro de que deseas guardar la encuesta?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, guardar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Lógica para guardar la encuesta
+                    Swal.fire('Encuesta guardada', '', 'success');
+                }
+            });
+        } else {
+            Swal.fire('Por favor, selecciona todas las respuestas antes de guardar', '', 'error');
+        }
+    }
+
+
+    function limpiarFormulario() {
+        console.log('Limpiando formulario...');
+
+        Swal.fire({
+            title: 'Limpiar formulario',
+            text: '¿Estás seguro de que deseas limpiar el formulario?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, limpiar',
+            cancelButtonText: 'No, volver atrás'
+        }).then((result) => {
+            console.log('Resultado de Swal:', result);
+
+            if (result.isConfirmed) {
+                // Recargar la página
+                location.reload();
+
+                // O, si prefieres redirigir a una URL específica
+                // window.location.href = "tu_otra_pagina.html";
+
+                Swal.fire('Formulario limpiado', '', 'info');
+            }
+        });
+    }
+
+
+
+
+
+    function cancelarAccion() {
+        Swal.fire({
+            title: 'Cancelar acción',
+            text: '¿Estás seguro de que deseas cancelar la acción?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, cancelar',
+            cancelButtonText: 'No, volver atrás'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Lógica para cancelar la acción
+                Swal.fire('Acción cancelada', '', 'info');
+            }
+        });
+    }
+
+    function mostrarResumen() {
+        Swal.fire({
+            title: 'Mostrar resumen',
+            text: '¿Estás seguro de que deseas ver el resumen?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, ver resumen',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Lógica para mostrar el resumen
+                Swal.fire('Resumen mostrado', '', 'success');
+            }
+        });
+    }
+</script>
 
 
 <script src="assets/feather.js"></script>
