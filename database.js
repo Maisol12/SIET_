@@ -16,15 +16,15 @@ connection.connect((err) => {
     console.log('Conectado a la base de datos');
 });
 
-function guardarResultados(idTienda, idEncuesta, idQuestion, answerText) {
-    console.log('Valores a insertar:', idTienda, idEncuesta, idQuestion, answerText);
+function guardarResultados(idTienda, idEncuesta, idQuestion, answerValue) {
+    console.log('Valores a insertar:', idTienda, idEncuesta, idQuestion, answerValue);
 
     const query = `
-        INSERT INTO answers (idTienda, idEncuesta, foreingIdQuestions, answerText)
+        INSERT INTO answers (nameTienda, nameEncuesta, idQuestion, answerValue)
         VALUES (?, ?, ?, ?)
     `;
 
-    connection.query(query, [idTienda, idEncuesta, idQuestion, answerText], (err, results, fields) => {
+    connection.query(query, [idTienda, idEncuesta, idQuestion, answerValue], (err, results, fields) => {
         if (err) {
             console.error('Error al insertar en la base de datos:', err);
             return;
@@ -32,7 +32,6 @@ function guardarResultados(idTienda, idEncuesta, idQuestion, answerText) {
         console.log('Resultados guardados en la base de datos:', results);
     });
 }
-
 
 
 function insertarTienda(nameShop) {
@@ -71,6 +70,30 @@ function obtenerTiendas(callback) {
     connection.query(query, (err, results, fields) => {
         if (err) {
             console.error('Error al obtener tiendas de la base de datos:', err);
+            return;
+        }
+        callback(results);
+    });
+}
+
+function obtenerIdTienda(nameShop, callback) {
+    const query = "SELECT idShop FROM shops WHERE nameShop = ?"
+
+    connection.query(query, [nameShop], (err, results, fields) => {
+        if (err) {
+            console.error('Error al obtener tiendas de la base de datos:', err);
+            return;
+        }
+        callback(results);
+    });
+}
+
+function obtenerIdEncuesta(nameSurvey, callback) {
+    const query = "SELECT idSurvey FROM surveys WHERE nameSurvey = ?"
+
+    connection.query(query, [nameSurvey], (err, results, fields) => {
+        if (err) {
+            console.error('Error al obtener encuestas de la base de datos:', err);
             return;
         }
         callback(results);
