@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
-Built-By: alberto
-Build-Jdk: Eclipse Temurin version 21
+Built-By: aldair
+Build-Jdk: Amazon Corretto version 20.0.2
 
