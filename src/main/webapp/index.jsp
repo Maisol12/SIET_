@@ -623,11 +623,6 @@
     };
 
 
-    // Función para obtener el valor seleccionado de un grupo de radio buttons
-    function obtenerValorSeleccionado(radios) {
-        const radioSeleccionado = Array.from(radios).find(radio => radio.checked);
-        return radioSeleccionado ? radioSeleccionado.value : null;
-    }
 
 
     function limpiarFormulario() {

@@ -37,7 +37,7 @@ app.post('/guardar-respuestas', (req, res) => {
 
 // Función para guardar las respuestas en la base de datos
 function guardarRespuestas(encuestaData, res) {
-    const { idEncuesta, respuestas } = encuestaData;
+    const { idTienda ,idEncuesta, respuestas } = encuestaData;
 
     // Itera sobre las respuestas y las guarda en la base de datos
     respuestas.forEach((respuesta) => {
@@ -45,6 +45,7 @@ function guardarRespuestas(encuestaData, res) {
 
         const answersData = {
             survey_id: idEncuesta,
+            shop_id: idTienda,
             idQuestion,
             answerValue,
         };
@@ -62,6 +63,21 @@ function guardarRespuestas(encuestaData, res) {
     });
 
     res.status(200).json({ success: true });
+}
+app.get('/mostrar-respuestas/:idEncuesta/:idTienda', (req, res) => {
+    mostrarRespuestas(res, req.params.idEncuesta, req.params.idTienda);
+});
+
+function mostrarRespuestas(res, idEncuesta, idTienda) {
+    const query = 'SELECT * FROM answers where survey_id = ' + idEncuesta + ' and shop_id =  '+ idTienda + ';';
+    connection.query(query, (err, results) => {
+        if (err) {
+            console.error('Error al obtener las respuestas:', err);
+            res.status(500).json({ error: 'Error al obtener las respuestas' });
+        } else {
+            res.json({ respuestas: results });
+        }
+    });
 }
 
 
