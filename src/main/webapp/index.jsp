@@ -219,8 +219,8 @@
 
 
 <script>
-    var selectedId = "";
-    var selectedId2 = "";
+    let selectedId = 0;
+    let selectedId2 = 0;
     $(document).ready(function () {
         cargarTiendas();
         function cargarTiendas() {
@@ -241,26 +241,24 @@
                     } else {
                         console.error('Error: Expected an array of tiendas, but received:', tiendas);
                     }
-
-                    // Obtener el ID de la tienda seleccionada al cambiar la opción
                     select.change(function () {
                         selectedId = $(this).val();
+                        console.log('HOLA MUNDO AQUI MANDO A LLAMAR LA FUNCION DE MOSTRAR RESPUESTAS');
+                        console.log('ESTE ES EL ID DE LA TIENDA');
                         console.log(selectedId);
+                        mostrarRespuestas();
                     });
+
                 })
                 .fail(function (error) {
                     console.error('Error loading tiendas:', error);
                 });
         }
-
-
     });
 
         function cargarEncuestas() {
-            // Hacer solicitud GET al servidor para obtener encuestas
             $.get("http://localhost:3000/mostrar-encuestas")
                 .done(function (encuestas) {
-                    // Llenar el menú desplegable con las encuestas
                     var select = $("#select2");
                     console.log(select)
                     select.empty();
@@ -275,11 +273,13 @@
                         console.error('Error: Expected an array of encuestas, but received:', encuestas);
                     }
 
+
                     // Obtener el ID de la encuesta seleccionada al cambiar la opción
                     select.change(function () {
                         selectedId2 = $(this).val();
-                        $("#idEncuesta").val(selectedId2);
+                        console.log('ESTE ES EL ID DE LA encuesta');
                         console.log(selectedId2);
+                        mostrarRespuestas();
                     });
                 })
                 .fail(function (error) {
@@ -292,6 +292,51 @@
 
 
 
+    function mostrarRespuestas() {
+        console.log('Mostrando respuestas...');
+        console.log(selectedId);
+        console.log(selectedId2);
+        $.get(`http://localhost:3000/mostrar-respuestas/` + selectedId + `/` + selectedId2 + `/`)
+            .done(function (respuestas) {
+                console.log(respuestas);
+                if (respuestas && respuestas.respuestas && Array.isArray(respuestas.respuestas)) {
+                    const categorias = ["funcionalidad", "confiabilidad", "usabilidad", "rendimiento", "mantenimiento", "portabilidad", "seguridad", "compatibilidad"];
+
+                    respuestas.respuestas.forEach((respuesta, index) => {
+                        const categoria = document.getElementsByName(categorias[index]);
+                        const indexToCheck = indexFromValue(respuesta.answerValue);
+
+                        if (categoria && categoria.length > indexToCheck) {
+                            categoria[indexToCheck].checked = true;
+                        } else {
+                            console.error('Error: Elemento no encontrado para la categoría:', categorias[index]);
+                        }
+                    });
+                } else {
+                    console.error('Error: Expected an array of respuestas, but received:', respuestas);
+                }
+            })
+            .fail(function (error) {
+                console.error('Error loading respuestas:', error);
+            });
+    }
+
+    const indexFromValue = (value) => {
+        switch (value) {
+            case 100:
+                return 4;
+            case 75:
+                return 3;
+            case 50:
+                return 2;
+            case 25:
+                return 1;
+            case 0:
+                return 0;
+            default:
+                return -1;
+        }
+    }
 
         function mostrarEncuesta() {
             console.log("Mostrando/ocultando la encuesta...");
@@ -317,6 +362,7 @@
             select2.addEventListener("change", mostrarEncuesta);
 
             mostrarEncuesta();
+            mostrarRespuestas();
         });
 
         document.addEventListener("DOMContentLoaded", mostrarEncuesta);
@@ -702,9 +748,6 @@
             }
         });
     }
-
-
-
 
 </script>
 
