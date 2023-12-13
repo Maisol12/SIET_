@@ -64,21 +64,22 @@ function guardarRespuestas(encuestaData, res) {
 
     res.status(200).json({ success: true });
 }
-app.get('/mostrar-respuestas/:idEncuesta/:idTienda', (req, res) => {
-    mostrarRespuestas(res, req.params.idEncuesta, req.params.idTienda);
-});
-
-function mostrarRespuestas(res, idEncuesta, idTienda) {
-    const query = 'SELECT * FROM answers where survey_id = ' + idEncuesta + ' and shop_id =  '+ idTienda + ';';
-    connection.query(query, (err, results) => {
+// Ruta para obtener respuestas por ID de encuesta y tienda
+app.get('/mostrar-respuestas/:idEncuesta/:idTienda/', (req, res) => {
+    const { idEncuesta, idTienda } = req.params;
+    const query = `SELECT * FROM answers WHERE survey_id = ? AND shop_id = ?;`;
+    connection.query(query, [idEncuesta, idTienda], (err, results) => {
         if (err) {
             console.error('Error al obtener las respuestas:', err);
             res.status(500).json({ error: 'Error al obtener las respuestas' });
         } else {
+            console.log(idTienda, idEncuesta)
             res.json({ respuestas: results });
         }
     });
-}
+});
+
+
 
 
 
